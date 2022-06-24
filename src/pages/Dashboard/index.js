@@ -7,7 +7,7 @@ import { FiMessageSquare, FiPlus, FiSearch, FiEdit2 } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 
 export default function Dashboard() {
-    const [chamados, setChamados] = useState([1]);
+    const [chamados, setChamados] = useState([]);
 
     // const { signOut } = useContext(AuthContext);
 
