@@ -4,16 +4,21 @@ import { useState, useEffect } from 'react';
 
 import Header from '../../components/Header';
 import Title from '../../components/Title';
-import { FiMessageSquare, FiPlus, FiSearch, FiEdit2 } from 'react-icons/fi';
+import { FiMessageSquare, FiPlus, FiSearch, FiEdit2, FiDelete } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
 import Modal from '../../components/Modal';
+import { toast } from 'react-toastify'
+import { useHistory, useParams } from 'react-router-dom';
 
 import firebase from '../../services/firebaseConnection';
 
 const listRef = firebase.firestore().collection('chamados').orderBy('created', 'desc');
 
 export default function Dashboard() {
+    const { id } = useParams();  //parâmetro para passar para o /new
+    const history = useHistory();
+
     const [chamados, setChamados] = useState([]);
     const [loading, setLoading] = useState(true);
     const [loadingMore, setLoadingMore] = useState(false);
@@ -87,6 +92,19 @@ export default function Dashboard() {
         setDetail(item);
     }
 
+    async function handleDelete(id) {
+        await firebase.firestore().collection('chamados').doc(id)
+        .delete()
+            .then(() => {
+                toast.success('Chamado excluído com sucesso!!');
+                history.push('/dashboard') //envia de volta para a tela de chamados
+            })
+            .catch((err) => {
+                toast.error('Ops, erro ao excluir chamado!');
+                console.log("Erro ao excluir O.S", err);
+            })
+    }
+
     if (loading) {
         return (
             <div>
@@ -152,6 +170,9 @@ export default function Dashboard() {
                                                 <Link className="action" to={`/new/${item.id}`} style={{ backgroundColor: '#F6a935' }}>
                                                     <FiEdit2 color="#FFF" size={17} />
                                                 </Link>
+                                                <button className="action" style={{ backgroundColor: '#e32b17' }}>
+                                                    <FiDelete color="#FFF" size={17} onClick={() => handleDelete(item.id)} />
+                                                </button>
                                             </td>
                                         </tr>
                                     )
