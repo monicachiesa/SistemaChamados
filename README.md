@@ -1,4 +1,4 @@
-## Projeto realizado no curso do Sujeito Programador 
+## Projeto realizado no curso do Sujeito Programador, com algumas mudanças e adição de funcionalidades
 
 Libs utilizadas:
 
