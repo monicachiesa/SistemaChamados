@@ -11,3 +11,5 @@ Libs utilizadas:
 ### React icons - npm install react-icons   (ícones)
 
 ### Date Fns -  npm install date-fns (para formatar as datas)
+
+### Validator - npm install validator (para as validações de e-mail, etc)
