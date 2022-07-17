@@ -4,18 +4,18 @@ import 'firebase/firestore' //banco de dados
 import 'firebase/storage'
 
 let firebaseConfig = {
-    apiKey: "AIzaSyASZvESWEACD7J6nT1u2tyvikGlIu4eOf0",
-    authDomain: "sistemachamados-781a9.firebaseapp.com",
-    projectId: "sistemachamados-781a9",
-    storageBucket: "sistemachamados-781a9.appspot.com",
-    messagingSenderId: "437280863615",
-    appId: "1:437280863615:web:9bebe8888b368aaaa1964a",
-    measurementId: "G-N69M7YV52V"
+    apiKey: process.env.apiKey,
+    authDomain: process.env.authDomain,
+    projectId: process.env.projectId,
+    storageBucket: process.env.storageBucket,
+    messagingSenderId: process.env.messagingSenderId,
+    appId: process.env.appId,
+    measurementId: process.env.measurementId,
   };
   
   // Initialize Firebase
   if (!firebase.apps.length) {
- firebase.initializeApp(firebaseConfig);
+      firebase.initializeApp(firebaseConfig);
   }
 
   export default firebase;
