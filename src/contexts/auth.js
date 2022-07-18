@@ -25,7 +25,7 @@ function AuthProvider({ children }) {
         loadStorage();
     }, [])
 
-    async function signUp(email, password, nome) {
+    async function signUp(email, password, nome, telefone) {
         setLoadingAuth(true);
         await firebase.auth().createUserWithEmailAndPassword(email, password)
             .then(async (value) => {
@@ -40,16 +40,17 @@ function AuthProvider({ children }) {
                             uid: uid,
                             nome: nome,
                             email: value.user.email,
+                            telefone: telefone,
                             avatarUrl: null
                         };
                         setUser(data);  //salva no useState os dados do user
                         storageUser(data);  //salva no localStorage também
                         setLoadingAuth(false);
-                        toast.success('Bem vindo(a) de volta! :)')
+                        toast.success('Cadastro realizado com sucesso! :)')
                     })
             }).catch((error) => {
                 console.log(error);
-                toast.error('Oops, algo deu errado!')
+                toast.error('Oops, dados incorretos!')
                 setLoadingAuth(false);
             })
     }
@@ -74,7 +75,8 @@ function AuthProvider({ children }) {
                     uid: uid,
                     nome: userProfile.data().nome,
                     avatarUrl: userProfile.data().avatarUrl,
-                    email: value.user.email
+                    email: value.user.email,
+                    telefone: value.user.telefone
                 }
                 setUser(data);  //salva no useState os dados do user
                 storageUser(data);  //salva no localStorage também

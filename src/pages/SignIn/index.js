@@ -3,6 +3,8 @@ import { AuthContext } from '../../contexts/auth'
 import { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import logo from '../../assets/logo.png'
+import validator from 'validator'
+import { toast} from 'react-toastify'
 
 function SignIn() {
 
@@ -13,6 +15,18 @@ function SignIn() {
 
   function handleSubmit(e) {
     e.preventDefault(); //para não atualizar a página
+
+    if (email == '') {
+      toast.error('Digite o seu e-mail!')
+    }
+
+    if (!validator.isEmail(email)) {
+      toast.error('Digite um e-mail válido!')
+    }
+    
+    if (password == '') {
+      toast.error('Digite a sua senha!')
+    }
 
     if (email !== '' && password !== '') {
       signIn(email, password);

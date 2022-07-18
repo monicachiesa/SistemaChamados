@@ -4,12 +4,13 @@ import { useState, useEffect } from 'react';
 
 import Header from '../../components/Header';
 import Title from '../../components/Title';
-import { FiMessageSquare, FiPlus, FiSearch, FiEdit2, FiDelete } from 'react-icons/fi';
+import { FiMessageSquare, FiPlus, FiSearch, FiEdit2, FiDelete, FiMoreHorizontal } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
 import Modal from '../../components/Modal';
 import { toast } from 'react-toastify'
 import { useHistory, useParams } from 'react-router-dom';
+
 
 import firebase from '../../services/firebaseConnection';
 
@@ -180,7 +181,7 @@ export default function Dashboard() {
                             </tbody>
                         </table>
                         {loadingMore && <h3 style={{ textAlign: 'center', marginTop: 15 }}>Buscando dados...</h3>}
-                        {!loadingMore && !isEmpty && <button className="btn-more" onClick={handleMore}>Buscar mais</button>}
+                        {!loadingMore && !isEmpty && <button className="btn-more" onClick={handleMore}>Buscar mais <FiMoreHorizontal color="#FFF" size={17} style={{  margin: '0 auto'}}/></button>}
                     </>
                 )}
             </div>
